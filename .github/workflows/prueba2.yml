@@ -1,0 +1,27 @@
+name: Ejecutar prueba de Selenium
+
+on:
+  push:
+    branches: [ main ]  # Cambia a la rama que desees
+  workflow_dispatch:  # Permite ejecutar la acción manualmente
+
+jobs:
+  selenium-test:
+    runs-on: ubuntu-latest  # El entorno donde se ejecutará
+
+    steps:
+    - name: Clonar el repositorio
+      uses: actions/checkout@v3  # Clona el repositorio
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # Especifica la versión de Node.js
+
+    - name: Instalar dependencias
+      run: |
+        npm install selenium-webdriver chromedriver
+
+    - name: Ejecutar script de Selenium
+      run: |
+        node busquedaDatacrm.js  # Asegúrate de que el script esté en el mismo directorio
